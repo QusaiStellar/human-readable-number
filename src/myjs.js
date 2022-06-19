@@ -60,9 +60,11 @@ const myf = (number) => {
 
       default:
          let lastNumberIndex;
+         const secondNumber = Number(numberArr[numberArr.length - 2]);
          numberArr.length === 3 ?
             lastNumberIndex = numberArr[2] : numberArr.length === 2 ?
                lastNumberIndex = numberArr[1] : lastNumberIndex = number
+
 
          Number(numberArr[numberArr.length - 2]) === 1 ?
             result : Number(numberArr[numberArr.length - 2]) === 0 ?
