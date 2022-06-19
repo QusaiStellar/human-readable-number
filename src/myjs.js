@@ -1,4 +1,5 @@
-module.exports = function toReadable(number) {
+
+const myf = (number) => {
    let result = "";
    const numberArr = number.toString().split("");
    const numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",];
@@ -73,3 +74,10 @@ module.exports = function toReadable(number) {
    }
    return result;
 }
+
+myf(990)
+
+// https://b1.cooksy.ru/articles/pravopisanie-chislitelnyh-v-angliyskom-yazyke-ot-1-do-100/
+// числа от 13-19 формируются по принципу цифр от 3-9 с частицей «-teen»
+// корень чисел 13 и 15 будет отличается от общего правила, их образование через корень thir и fif
+// десятки образуются с присоединения к цифре суффикса –ty, но есть исключения в числах 20, 30, 40 и 50 и цифре 80 отсуствует повторение «t»
