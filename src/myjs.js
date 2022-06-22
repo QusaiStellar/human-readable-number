@@ -1,8 +1,32 @@
-
 const myf = (number) => {
+
+   if (!number) {
+      return 'zero';
+   }
+
    let result = "";
    const numberArr = number.toString().split("");
-   const numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",];
+   const UnitNumbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",];
+   const TenthNumbers = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",];
+
+   if (numberArr.length === 3) {
+      let tenth = +numberArr.slice(1).join("");
+      let firstNumber = UnitNumbers[numberArr[0]];
+      let secondNumber;
+      let thirdNumber;
+
+      if (tenth > 9 && tenth < 20) {
+         secondNumber = tenth;
+         return result = `${firstNumber} hundred ${secondNumber}`
+      } else {
+         let secondNumberIndex = Number(numberArr[2]);
+         secondNumber = UnitNumbers[secondNumberIndex];
+      }
+
+      if ()
+
+         result = `${firstNumber} hundred `
+   }
 
    switch (numberArr.length) {
       case 3:
