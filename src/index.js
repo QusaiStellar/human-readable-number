@@ -1,75 +1,56 @@
 module.exports = function toReadable(number) {
+
    let result = "";
    const numberArr = number.toString().split("");
-   const numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",];
+   const tenth = Number(numberArr.slice(1).join(""));
 
-   switch (numberArr.length) {
-      case 3:
-         result = `${numbers[numberArr[0]]} hundred `;
-      case 2:
-         let tenth;
+   const UnitNumbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",];
+   const numbersToTwenty = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",];
+   const TenthNumbers = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety",];
 
-         numberArr.length === 3 ?
-            tenth = +numberArr.slice(1).join("") :
-            tenth = number;
+   const firstNumberIndex = Number(numberArr[0]);
+   const secondNumberIndex = Number(numberArr[1]);
+   const thirdNumberIndex = Number(numberArr[2]);
 
-         let tenthArr = tenth.toString().split("");
+   let firstNumber = UnitNumbers[firstNumberIndex];
+   let secondNumber = UnitNumbers[secondNumberIndex];
+   let thirdNumber = UnitNumbers[thirdNumberIndex];
 
-         if (tenth < 20 && 9 < tenth) {
-            switch (tenth) {
-               case 11:
-               case 12:
-                  result = result + numbers[tenth];
-                  break;
-               case 13:
-                  result = `${result}thirteen`;
-                  break;
-               case 15:
-                  result = `${result}fifteen`;
-                  break;
-               case 18:
-                  result = `${result}eighteen`;
-                  break;
-               default:
-                  result = `${result}${numbers[tenthArr[1]]}teen`;
-                  break;
-            }
-         } else if (tenth >= 20) {
-            switch (+tenthArr[0]) {
-               case 2:
-                  result = `${result}twenty`;
-                  break;
-               case 3:
-                  result = `${result}thirty`;
-                  break;
-               case 4:
-                  result = `${result}forty`;
-                  break;
-               case 5:
-                  result = `${result}fifty`;
-                  break;
-               case 8:
-                  result = `${result}eighty`;
-                  break;
-               default:
-                  result = `${result}${numbers[tenthArr[0]]}ty`;
-                  break;
-            }
-         }
+   if (numberArr.length === 3) {
 
-      default:
-         let lastNumberIndex;
-         numberArr.length === 3 ?
-            lastNumberIndex = numberArr[2] : numberArr.length === 2 ?
-               lastNumberIndex = numberArr[1] : lastNumberIndex = number
+      if (tenth >= 10 && tenth < 20) {
+         secondNumber = numbersToTwenty[thirdNumberIndex];
+         result = `${firstNumber} hundred ${secondNumber}`
+      } else if (tenth >= 20) {
+         secondNumber = TenthNumbers[secondNumberIndex];
+         Number(thirdNumberIndex) !== 0 ? thirdNumber = UnitNumbers[thirdNumberIndex] : thirdNumber = '';
+         result = `${firstNumber} hundred ${secondNumber} ${thirdNumber}`;
+      } else {
+         thirdNumberIndex ? thirdNumber = UnitNumbers[thirdNumberIndex] : thirdNumber = '';
+         result = `${firstNumber} hundred ${thirdNumber}`;
+      }
 
-         Number(numberArr[numberArr.length - 2]) === 1 ?
-            result : Number(numberArr[numberArr.length - 2]) === 0 ?
-               result = `${result}${numbers[lastNumberIndex]}` : result = `${result} ${numbers[lastNumberIndex]}`
+   } else if (numberArr.length === 2) {
 
-         console.log(result);
+      if (number >= 10 && number < 20) {
+         firstNumber = numbersToTwenty[secondNumberIndex];
+         result = `${firstNumber}`;
+      } else if (number >= 20) {
+         firstNumber = TenthNumbers[firstNumberIndex];
+         secondNumber = UnitNumbers[secondNumberIndex];
+         Number(secondNumberIndex) !== 0 ? secondNumber = UnitNumbers[secondNumberIndex] : secondNumber = '';
+         result = `${firstNumber} ${secondNumber}`;
+      } else {
+         thirdNumber = tenth;
+         result = `${firstNumber} ${thirdNumber}`;
+      }
 
-         break;
+   } else {
+
+      firstNumber = UnitNumbers[firstNumberIndex];
+      result = `${firstNumber}`;
+
    }
-   return result;
+
+   return result.trim();
 }
